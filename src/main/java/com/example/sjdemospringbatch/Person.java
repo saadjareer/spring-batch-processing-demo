@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "user_analytics_table")
-public class Employee {
+@Table(name = "person")
+public class Person {
 
     @Id
     private String id;

@@ -89,7 +89,7 @@ public class SjDemoSpringBatchApplication {
     @Bean
     public Step step(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         return new StepBuilder("step", jobRepository)
-                .<Employee, Employee>chunk(5, transactionManager)
+                .<Person, Person>chunk(5, transactionManager)
                 .reader(itemReader())
                 .writer(itemWriter())
                 .build();
@@ -108,19 +108,19 @@ public class SjDemoSpringBatchApplication {
     }
 
     @Bean
-    public JdbcCursorItemReader<Employee> itemReader() {
+    public JdbcCursorItemReader<Person> itemReader() {
         String sql = "select * from person";
-        return new JdbcCursorItemReaderBuilder<Employee>()
+        return new JdbcCursorItemReaderBuilder<Person>()
                 .name("personItemReader")
                 .dataSource(dataSource())
                 .sql(sql)
-                .beanRowMapper(Employee.class)
+                .beanRowMapper(Person.class)
                 .build();
     }
 
     @Bean
-    public FlatFileItemWriter<Employee> itemWriter() {
-        return new FlatFileItemWriterBuilder<Employee>()
+    public FlatFileItemWriter<Person> itemWriter() {
+        return new FlatFileItemWriterBuilder<Person>()
                 .resource(new FileSystemResource("persons.csv"))
                 .name("personItemWriter")
                 .delimited()
