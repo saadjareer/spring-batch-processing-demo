@@ -1,4 +1,4 @@
-package com.example.sjdemospringbatch;
+package com.example.demo;
 
 import jakarta.persistence.*;
 import lombok.Data;

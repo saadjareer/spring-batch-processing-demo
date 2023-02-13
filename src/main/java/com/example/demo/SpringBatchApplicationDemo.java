@@ -1,4 +1,4 @@
-package com.example.sjdemospringbatch;
+package com.example.demo;
 
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -11,7 +11,6 @@ import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuild
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -31,7 +30,7 @@ import java.util.Properties;
 
 @EnableAutoConfiguration
 @EnableBatchProcessing(dataSourceRef = "batchDataSource", transactionManagerRef = "batchTransactionManager")
-public class SjDemoSpringBatchApplication {
+public class SpringBatchApplicationDemo {
 
     @Bean
     public DataSource batchDataSource() {
@@ -44,7 +43,7 @@ public class SjDemoSpringBatchApplication {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] {"com.example.sjdemospringbatch"});
+        em.setPackagesToScan(new String[] {"com.example.demo"});
         JpaVendorAdapter jpaAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(jpaAdapter);
         em.setJpaProperties(jpaProperties());
@@ -75,7 +74,7 @@ public class SjDemoSpringBatchApplication {
 
     public static void main(String e []) throws Exception {
 
-        ApplicationContext context = new AnnotationConfigApplicationContext(SjDemoSpringBatchApplication.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringBatchApplicationDemo.class);
 
         JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
 
