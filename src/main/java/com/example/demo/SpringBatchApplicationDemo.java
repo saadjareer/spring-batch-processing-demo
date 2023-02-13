@@ -28,7 +28,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @EnableBatchProcessing(dataSourceRef = "batchDataSource", transactionManagerRef = "batchTransactionManager")
 public class SpringBatchApplicationDemo {
 
@@ -39,24 +39,24 @@ public class SpringBatchApplicationDemo {
                 .generateUniqueName(false).build();
     }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] {"com.example.demo"});
-        JpaVendorAdapter jpaAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(jpaAdapter);
-        em.setJpaProperties(jpaProperties());
-
-        return em;
-    }
-
-    private final Properties jpaProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-
-        return properties;
-    }
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+//        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+//        em.setDataSource(dataSource());
+//        em.setPackagesToScan(new String[] {"com.example.demo"});
+//        JpaVendorAdapter jpaAdapter = new HibernateJpaVendorAdapter();
+//        em.setJpaVendorAdapter(jpaAdapter);
+//        em.setJpaProperties(jpaProperties());
+//
+//        return em;
+//    }
+//
+//    private final Properties jpaProperties() {
+//        Properties properties = new Properties();
+//        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+//
+//        return properties;
+//    }
 
     @Bean
     public DataSource dataSource() {
